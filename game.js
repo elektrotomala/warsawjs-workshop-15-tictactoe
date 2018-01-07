@@ -86,6 +86,17 @@ var column3 = fields[2].className + fields[5].className + fields[8].className;
 var diagonal1 = fields[0].className + fields[4].className + fields[8].className;
 var diagonal2 = fields[2].className + fields[4].className + fields[6].className;
 
+var boardChek = [
+row1,
+row2,
+row3,
+column1,
+column2,
+column3,
+diagonal1,
+diagonal2
+];
+
 if (row1 === 'redredred' ||
 row2 === 'redredred' ||
 row3 === 'redredred' ||
