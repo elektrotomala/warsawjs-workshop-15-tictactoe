@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     //Będziemy zbierać statystyki
-    var liczbaKliniec = 0;
+    var liczbaKlikniec = 0;
     var numerRundy = 1;
-    
+    var statsy = 1;
+
     //Każdy gracz dostaje swoją klasę
 
     var playerClasses = {
@@ -21,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function initGame() {
 
         emptyFields = 9;
-        liczbaKliniec = 0;
 
         //Znajduje wszystkie divy klasy board
         var fields = document.querySelectorAll('.board > div');
@@ -54,12 +54,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         //Zwiększamy statystykę kliknięć
-        liczbaKliniec++;
-        //usunięcie możliwości zmiany koloru po kliknięciu
+        liczbaKlikniec++;
 
+        //usunięcie możliwości zmiany koloru po kliknięciu
         this.removeEventListener('click', fieldClickHandler);
 
-        console.log(liczbaKliniec);
+        console.log('Numer klikniecia: ' + liczbaKlikniec);
 
         checkWinner();
     }
@@ -107,27 +107,37 @@ diagonal1,
 diagonal2
 ];
 
+        console.log(liczbaKlikniec, numerRundy);
+
         if (boardChek.includes('redredred')) {
             alert('Red Wins!');
             numerRundy++;
+            statsy = liczbaKlikniec / numerRundy;
             initGame();
         }
 
         if (boardChek.includes('blueblueblue')) {
             alert('Blue Wins!');
             numerRundy++;
+            statsy = liczbaKlikniec / numerRundy;
             initGame();
         }
 
         if (emptyFields === 0) {
             alert('Nie ma już wolnych pól.');
             numerRundy++;
+            statsy = liczbaKlikniec / numerRundy;
             initGame();
         }
 
 
+        //var statsy = liczbaKlikniec/numerRundy;
+
+        console.log('Średnia liczba kliknięć na rundę: ' + statsy);
+        document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy + '. W jednej rundzie oddano średnio ' + statsy + ' kliknięć.';
 
     }
+
 
     //Start gry
 
