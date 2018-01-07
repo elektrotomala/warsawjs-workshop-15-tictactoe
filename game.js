@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    //Będziemy zbierać statystyki
+    var liczbaKliniec = 0;
+    var numerRundy = 1;
+    
     //Każdy gracz dostaje swoją klasę
 
     var playerClasses = {
@@ -17,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function initGame() {
 
         emptyFields = 9;
+        liczbaKliniec = 0;
 
         //Znajduje wszystkie divy klasy board
         var fields = document.querySelectorAll('.board > div');
@@ -27,7 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
         //Dla diva dodaje funkcję po kliknięciu
         fields.forEach(field => field.addEventListener('click', fieldClickHandler));
         fields.forEach(field => field.removeAttribute('class'));
+        document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy;
     }
+
 
     function fieldClickHandler() {
 
@@ -37,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //Zmniejszamy liczbę wolnych pól
         emptyFields--;
 
-        // Zapis if - tego, co niżej - w inny sposób
+        // Zapis if - tego, co niżej - w "skrócony zapis if"
         //currentPlayer = currentPlayer === 'playerA' ? 'playerB' : 'playerA';
 
         if (currentPlayer === 'playerA') {
@@ -46,11 +53,13 @@ document.addEventListener('DOMContentLoaded', function () {
             currentPlayer = 'playerA';
         }
 
+        //Zwiększamy statystykę kliknięć
+        liczbaKliniec++;
         //usunięcie możliwości zmiany koloru po kliknięciu
 
         this.removeEventListener('click', fieldClickHandler);
 
-
+        console.log(liczbaKliniec);
 
         checkWinner();
     }
@@ -100,20 +109,23 @@ diagonal2
 
         if (boardChek.includes('redredred')) {
             alert('Red Wins!');
+            numerRundy++;
             initGame();
         }
 
         if (boardChek.includes('blueblueblue')) {
             alert('Blue Wins!');
+            numerRundy++;
             initGame();
         }
 
         if (emptyFields === 0) {
             alert('Nie ma już wolnych pól.');
+            numerRundy++;
             initGame();
         }
-        
-       
+
+
 
     }
 
