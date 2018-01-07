@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Będziemy zbierać statystyki
     var liczbaKlikniec = 0;
     var numerRundy = 1;
-    var statsy = 1;
+    var statsy = ' jeszcze niezbadaną liczbę ';
 
     //Każdy gracz dostaje swoją klasę
 
@@ -107,7 +107,7 @@ diagonal1,
 diagonal2
 ];
 
-        console.log(liczbaKlikniec, numerRundy);
+        console.log('Liczba kliknięć i numer rundy: ' + liczbaKlikniec, numerRundy);
 
         if (boardChek.includes('redredred')) {
             alert('Red Wins!');

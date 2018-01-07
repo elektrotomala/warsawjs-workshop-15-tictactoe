@@ -25,8 +25,11 @@
 }
 
 #ktoraRunda {
-    margin-left: 42%;
+    margin-left: 33%;
+    text-align: center;
     color: #430e0e;
     font-size: 0,9em;
     font-weight: 900;
+    width: 33%;
+    height: auto;
 }
