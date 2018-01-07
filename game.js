@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Liczba pozostałych pól
 
     var emptyFields;
+    initGame();
 
     function initGame() {
 
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //Dla diva dodaje funkcję po kliknięciu
         fields.forEach(field => field.addEventListener('click', fieldClickHandler));
+        fields.forEach(field => field.removeAttribute('class'));
     }
 
     function fieldClickHandler() {
@@ -98,12 +100,12 @@ diagonal2
 
         if (boardChek.includes('redredred')) {
             alert('Red Wins!');
-            return;
+            initGame();
         }
 
         if (boardChek.includes('blueblueblue')) {
             alert('Blue Wins!');
-            return;
+            initGame();
         }
 
         if (emptyFields === 0) {
@@ -111,17 +113,11 @@ diagonal2
             initGame();
         }
         
-        if(emptyFields === 0){
-            setTimeout(() => {
-                alert('Krawat');
-                initGame();
-            },1000);
-        }
+       
 
     }
 
     //Start gry
 
-    initGame();
 
 });
