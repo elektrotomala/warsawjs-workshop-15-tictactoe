@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function checkWinner() {
 
-
         //Zbiera dane o wszystkich polach
         var fields = document.querySelectorAll('.board > div');
 
@@ -112,34 +111,30 @@ diagonal2
         if (boardChek.includes('redredred')) {
             alert('Red Wins!');
             numerRundy++;
-            statsy = liczbaKlikniec / numerRundy;
+            statsy = liczbaKlikniec / (numerRundy - 1);
             initGame();
         }
 
         if (boardChek.includes('blueblueblue')) {
             alert('Blue Wins!');
             numerRundy++;
-            statsy = liczbaKlikniec / numerRundy;
+            statsy = liczbaKlikniec / (numerRundy - 1);
             initGame();
         }
 
         if (emptyFields === 0) {
             alert('Nie ma już wolnych pól.');
             numerRundy++;
-            statsy = liczbaKlikniec / numerRundy;
+            statsy = liczbaKlikniec / (numerRundy - 1);
             initGame();
         }
 
 
-        //var statsy = liczbaKlikniec/numerRundy;
 
         console.log('Średnia liczba kliknięć na rundę: ' + statsy);
         document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy + '. W jednej rundzie oddano średnio ' + statsy + ' kliknięć.';
 
     }
-
-
-    //Start gry
 
 
 });

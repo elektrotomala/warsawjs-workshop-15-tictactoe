@@ -32,4 +32,6 @@
     font-weight: 900;
     width: 33%;
     height: auto;
+    border: #bb8dc6 dotted 2px;
+    background-color: azure;
 }
