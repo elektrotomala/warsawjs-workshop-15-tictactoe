@@ -109,24 +109,38 @@ diagonal2
         console.log('Liczba kliknięć i numer rundy: ' + liczbaKlikniec, numerRundy);
 
         if (boardChek.includes('redredred')) {
-            alert('Red Wins!');
-            numerRundy++;
-            statsy = liczbaKlikniec / (numerRundy - 1);
-            initGame();
+
+            //Arrow function =>
+
+            setTimeout(() => {
+                alert('Red Wins!');
+                numerRundy++;
+                statsy = liczbaKlikniec / (numerRundy - 1);
+                initGame();
+            }, 100);
+
         }
 
         if (boardChek.includes('blueblueblue')) {
-            alert('Blue Wins!');
-            numerRundy++;
-            statsy = liczbaKlikniec / (numerRundy - 1);
-            initGame();
+
+            setTimeout(() => {
+                alert('Blue Wins!');
+                numerRundy++;
+                statsy = liczbaKlikniec / (numerRundy - 1);
+                initGame();
+            }, 100);
         }
 
         if (emptyFields === 0) {
-            alert('Nie ma już wolnych pól.');
-            numerRundy++;
-            statsy = liczbaKlikniec / (numerRundy - 1);
-            initGame();
+
+            setTimeout(() => {
+
+
+                alert('Nie ma już wolnych pól.');
+                numerRundy++;
+                statsy = liczbaKlikniec / (numerRundy - 1);
+                initGame();
+            }, 100);
         }
 
 
