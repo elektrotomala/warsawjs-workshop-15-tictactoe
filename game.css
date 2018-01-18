@@ -1,25 +1,42 @@
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .board {
-	height: 300px;
-	width: 300px;
-	margin: 0 auto;
-	font-size: 0;
+    height: 300px;
+    width: 300px;
+    margin: 0 auto;
+    font-size: 0;
 }
 
 .board div {
-	height: 100px;
-	width: 100px;
-	display: inline-block;
-	border: 1px solid grey;
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    border: 1px solid grey;
 }
 
 .red {
-	background-color: crimson;
+    background-color: #ea1212;
 }
 
 .blue {
-	background-color: cornflowerblue;
+    background-color: #005aff;
+}
+
+#ktoraRunda {
+    margin-left: 33%;
+    text-align: center;
+    color: #430e0e;
+    font-size: 0,9em;
+    font-weight: 900;
+    width: 33%;
+    height: auto;
+    border: #bb8dc6 dotted 2px;
+    background-color: azure;
+}
+
+#czyja-runda {
+    color: darkorchid;
+    font-size: 2em;
 }

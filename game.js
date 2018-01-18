@@ -1,5 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    //Będziemy zbierać statystyki
+    var liczbaKlikniec = 0;
+    var numerRundy = 1;
+    var statsy = ' jeszcze niezbadaną liczbę ';
+
+	function funkcjaStatsy() {
+    if (statsy === ' jeszcze niezbadaną liczbę ') {
+        return ' jeszcze niezbadaną liczbę ';
+    } 
+
+//return statsy.toFixed(2);
+
+return Math.round(statsy);
+  
+}
+    
+
     //Każdy gracz dostaje swoją klasę
 
     var playerClasses = {
@@ -12,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Liczba pozostałych pól
 
     var emptyFields;
+    initGame();
 
     function initGame() {
 
@@ -25,7 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //Dla diva dodaje funkcję po kliknięciu
         fields.forEach(field => field.addEventListener('click', fieldClickHandler));
+        fields.forEach(field => field.removeAttribute('class'));
+        document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy;
     }
+
 
     function fieldClickHandler() {
 
@@ -35,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //Zmniejszamy liczbę wolnych pól
         emptyFields--;
 
-        // Zapis if - tego, co niżej - w inny sposób
+        // Zapis if - tego, co niżej - w "skrócony zapis if"
         //currentPlayer = currentPlayer === 'playerA' ? 'playerB' : 'playerA';
 
         if (currentPlayer === 'playerA') {
@@ -44,17 +65,18 @@ document.addEventListener('DOMContentLoaded', function () {
             currentPlayer = 'playerA';
         }
 
-        //usunięcie możliwości zmiany koloru po kliknięciu
+        //Zwiększamy statystykę kliknięć
+        liczbaKlikniec++;
 
+        //usunięcie możliwości zmiany koloru po kliknięciu
         this.removeEventListener('click', fieldClickHandler);
 
-
+        console.log('Numer klikniecia: ' + liczbaKlikniec);
 
         checkWinner();
     }
 
     function checkWinner() {
-
 
         //Zbiera dane o wszystkich polach
         var fields = document.querySelectorAll('.board > div');
@@ -96,32 +118,52 @@ diagonal1,
 diagonal2
 ];
 
+        console.log('Liczba kliknięć i numer rundy: ' + liczbaKlikniec, numerRundy);
+
         if (boardChek.includes('redredred')) {
-            alert('Red Wins!');
-            return;
+
+            //Arrow function =>
+
+            setTimeout(() => {
+                alert('Red Wins!');
+                numerRundy++;
+                statsy = liczbaKlikniec / (numerRundy - 1);
+                initGame();
+            }, 100);
+
         }
 
         if (boardChek.includes('blueblueblue')) {
-            alert('Blue Wins!');
-            return;
+
+            setTimeout(() => {
+                alert('Blue Wins!');
+                numerRundy++;
+                statsy = liczbaKlikniec / (numerRundy - 1);
+                initGame();
+            }, 100);
         }
 
         if (emptyFields === 0) {
-            alert('Nie ma już wolnych pól.');
-            initGame();
-        }
-        
-        if(emptyFields === 0){
+
             setTimeout(() => {
-                alert('Krawat');
+
+
+                alert('Nie ma już wolnych pól.');
+                numerRundy++;
+                statsy = liczbaKlikniec / (numerRundy - 1);
                 initGame();
-            },1000);
+            }, 100);
         }
+
+
+
+        console.log('Średnia liczba kliknięć na rundę: ' + statsy);
+        
+
+        
+        document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy + '. W jednej rundzie oddano średnio ' + funkcjaStatsy()  + ' kliknięć.';
 
     }
 
-    //Start gry
-
-    initGame();
 
 });
