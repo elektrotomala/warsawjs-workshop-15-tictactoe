@@ -5,6 +5,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var numerRundy = 1;
     var statsy = ' jeszcze niezbadaną liczbę ';
 
+	function funkcjaStatsy() {
+    if (statsy === ' jeszcze niezbadaną liczbę ') {
+        return ' jeszcze niezbadaną liczbę ';
+    } 
+
+//return statsy.toFixed(2);
+
+return Math.round(statsy);
+  
+}
+    
+
     //Każdy gracz dostaje swoją klasę
 
     var playerClasses = {
@@ -146,7 +158,10 @@ diagonal2
 
 
         console.log('Średnia liczba kliknięć na rundę: ' + statsy);
-        document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy + '. W jednej rundzie oddano średnio ' + statsy + ' kliknięć.';
+        
+
+        
+        document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy + '. W jednej rundzie oddano średnio ' + funkcjaStatsy()  + ' kliknięć.';
 
     }
 
