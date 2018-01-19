@@ -28,7 +28,7 @@
     margin-left: 33%;
     text-align: center;
     color: #430e0e;
-    font-size: 0,9em;
+    font-size: 0, 9em;
     font-weight: 900;
     width: 33%;
     height: auto;
@@ -36,7 +36,8 @@
     background-color: azure;
 }
 
-#czyja-runda {
-    color: darkorchid;
+#czyjaRunda {
+    text-align: center;
+    color: #1ba08c;
     font-size: 2em;
 }

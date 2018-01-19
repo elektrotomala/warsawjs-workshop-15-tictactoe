@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div id="czyjaRunda">Rozpocznij grę</div>
+    <div id="czyja-runda"></div>
     <br>
     <div class="board">
         <div></div>
