@@ -33,22 +33,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function czyjaRunda() {
         var round = document.getElementById('czyjaRunda');
+        
+        //Zmiana koloru
         round.className = playerClasses[currentPlayer];
-        round.innerHTML = `Teraz runda gracza: ${currentPlayer}`;
+        
+        round.innerHTML = `Teraz ruch gracza: ${currentPlayer}`;
 
+        
     }
 
 
     function initGame() {
-
-
-        czyjaRunda();
 
         emptyFields = 9;
 
         //Znajduje wszystkie divy klasy board
         var fields = document.querySelectorAll('.board > div');
         document.getElementById('czyjaRunda').innerHTML = 'Rozpocznij grę';
+        document.getElementById('czyjaRunda').className = 'liliowe';
 
         //Ustawiamy gracza na A
         currentPlayer = 'playerA';
@@ -57,12 +59,14 @@ document.addEventListener('DOMContentLoaded', function () {
         fields.forEach(field => field.addEventListener('click', fieldClickHandler));
         fields.forEach(field => field.removeAttribute('class'));
         document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy;
-    }
+        }
 
 
 
 
     function fieldClickHandler() {
+
+        
 
         var playerClass = playerClasses[currentPlayer];
         this.classList.add(playerClass);
@@ -82,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
             currentPlayer = 'playerA';
         }
 
+        czyjaRunda();
+        
         //Zwiększamy statystykę kliknięć
         liczbaKlikniec++;
 
