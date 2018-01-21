@@ -44,6 +44,11 @@
 
 .liliowe {
     color: coral;
-    background-color: #DD9ECD;
-    
+    /* background-color: #DD9ECD; */
+ }
+
+button {
+    background-color: #FFF;
+    padding: 7px 10px;
+    text-transform: uppercase;
 }

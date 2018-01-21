@@ -1,5 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    //przycisk resetu
+    var resetButton = document.getElementById('reset-score');
+
+    //funkcja resetująca punkty po kliknięciu na button reseta
+    resetButton.addEventListener('click', function () {
+        scores['playerA'] = 0;
+        scores['playerB'] = 0;
+        displayPlayerScore('playerA');
+        displayPlayerScore('playerB');
+    });
+
     //Będziemy zbierać statystyki
     var liczbaKlikniec = 0;
     var numerRundy = 1;
@@ -9,16 +20,23 @@ document.addEventListener('DOMContentLoaded', function () {
         if (statsy === ' jeszcze niezbadaną liczbę ') {
             return ' jeszcze niezbadaną liczbę ';
         }
-
         //return statsy.toFixed(2);
-
         return Math.round(statsy);
-
     }
 
+    //funkcja wyświetlająca punkty
+    function displayPlayerScore(player) {
+        var score = document.getElementById(`${player}-score`);
+        score.innerHTML = `${player} score: ${scores[player]}`;
+    }
+
+    //Zliczamy punkty - obiekt
+    var scores = {
+        'playerA': 0,
+        'playerB': 0
+    };
 
     //Każdy gracz dostaje swoją klasę
-
     var playerClasses = {
         'playerA': 'red',
         'playerB': 'blue'
@@ -27,46 +45,47 @@ document.addEventListener('DOMContentLoaded', function () {
     var currentPlayer;
 
     //Liczba pozostałych pól
-
     var emptyFields;
-    initGame();
-
-    function czyjaRunda() {
-        var round = document.getElementById('czyjaRunda');
-        
-        //Zmiana koloru
-        round.className = playerClasses[currentPlayer];
-        
-        round.innerHTML = `Teraz ruch gracza: ${currentPlayer}`;
-
-        
-    }
-
 
     function initGame() {
 
-        emptyFields = 9;
-
         //Znajduje wszystkie divy klasy board
         var fields = document.querySelectorAll('.board > div');
-        document.getElementById('czyjaRunda').innerHTML = 'Rozpocznij grę';
-        document.getElementById('czyjaRunda').className = 'liliowe';
+
+        //Pola będą zapełnianie
+        emptyFields = 9;
 
         //Ustawiamy gracza na A
         currentPlayer = 'playerA';
+
+        setTimeout(document.getElementById('czyjaRunda').innerHTML = 'Rozpocznij grę', 3000);
+
+        document.getElementById('czyjaRunda').className = 'liliowe';
 
         //Dla diva dodaje funkcję po kliknięciu
         fields.forEach(field => field.addEventListener('click', fieldClickHandler));
         fields.forEach(field => field.removeAttribute('class'));
         document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy;
-        }
+    }
 
+    initGame();
 
+    //funkcja dodająca punkty - player będzie zmienną
+    function updatePlayerScore(player) {
+        scores[player]++;
+        //document.getElementById(player + `${player}-score`).innerHTML = scores;
+    }
 
+    //podawanie numeru rundy
+    function czyjaRunda() {
+        var round = document.getElementById('czyjaRunda');
+        //Zmiana koloru
+        round.className = playerClasses[currentPlayer];
+        //dodanie napisu
+        round.innerHTML = `Teraz ruch gracza: ${currentPlayer}`;
+    }
 
     function fieldClickHandler() {
-
-        
 
         var playerClass = playerClasses[currentPlayer];
         this.classList.add(playerClass);
@@ -87,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         czyjaRunda();
-        
+
         //Zwiększamy statystykę kliknięć
         liczbaKlikniec++;
 
@@ -141,7 +160,7 @@ diagonal1,
 diagonal2
 ];
 
-        console.log('Liczba kliknięć i numer rundy: ' + liczbaKlikniec, numerRundy);
+
 
         if (boardChek.includes('redredred')) {
 
@@ -151,9 +170,13 @@ diagonal2
                 alert('Red Wins!');
                 numerRundy++;
                 statsy = liczbaKlikniec / (numerRundy - 1);
+
+
+                setTimeout(() => {
+                    updatePlayerScore(playerA);
+                }, 1000)
                 initGame();
             }, 100);
-
         }
 
         if (boardChek.includes('blueblueblue')) {
@@ -162,33 +185,33 @@ diagonal2
                 alert('Blue Wins!');
                 numerRundy++;
                 statsy = liczbaKlikniec / (numerRundy - 1);
+
+                setTimeout(() => {
+                    updatePlayerScore(playerB);
+                }, 1000)
+
                 initGame();
             }, 100);
-
         }
 
         if (emptyFields === 0) {
 
             setTimeout(() => {
 
-
                 alert('Nie ma już wolnych pól.');
                 numerRundy++;
                 statsy = liczbaKlikniec / (numerRundy - 1);
                 initGame();
             }, 100);
-
         }
 
-
-
-        console.log('Średnia liczba kliknięć na rundę: ' + statsy);
-
-
-
+        //Podajemy w DIV numer rundy i statystykę
         document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy + '. W jednej rundzie oddano średnio ' + funkcjaStatsy() + ' kliknięć.';
 
+        //Dodatek kontrolny 
+        console.log('Średnia liczba kliknięć na rundę: ' + statsy);
     }
-
-
 });
+
+//DODATKI
+//console.log('Liczba kliknięć i numer rundy: ' + liczbaKlikniec, numerRundy);
