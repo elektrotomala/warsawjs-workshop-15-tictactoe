@@ -26,8 +26,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //funkcja wyświetlająca punkty
     function displayPlayerScore(player) {
-        var score = document.getElementById(`${player}-score`);
-        score.innerHTML = `${player} score: ${scores[player]}`;
+		var score = document.getElementById(`${player}-score`);
+		score.innerHTML = `${player} score: ${scores[player]}`;
+	}
+
+    //funkcja dodająca punkty - player będzie zmienną
+    function updatePlayerScore(player) {
+        scores[player]++;
+        //document.getElementById(player + `${player}-score`).innerHTML = scores;
     }
 
     //Zliczamy punkty - obiekt
@@ -66,15 +72,14 @@ document.addEventListener('DOMContentLoaded', function () {
         fields.forEach(field => field.addEventListener('click', fieldClickHandler));
         fields.forEach(field => field.removeAttribute('class'));
         document.getElementById('ktoraRunda').innerHTML = 'Runda numer ' + numerRundy;
+        displayPlayerScore('playerA');
+        displayPlayerScore('playerB');
+        
     }
 
     initGame();
 
-    //funkcja dodająca punkty - player będzie zmienną
-    function updatePlayerScore(player) {
-        scores[player]++;
-        //document.getElementById(player + `${player}-score`).innerHTML = scores;
-    }
+
 
     //podawanie numeru rundy
     function czyjaRunda() {
@@ -105,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
             currentPlayer = 'playerA';
         }
 
-        czyjaRunda();
+czyjaRunda();
 
         //Zwiększamy statystykę kliknięć
         liczbaKlikniec++;
@@ -170,7 +175,7 @@ diagonal2
                 alert('Red Wins!');
                 numerRundy++;
                 statsy = liczbaKlikniec / (numerRundy - 1);
-
+                scores["playerA"]++;
 
                 setTimeout(() => {
                     updatePlayerScore(playerA);
@@ -185,7 +190,8 @@ diagonal2
                 alert('Blue Wins!');
                 numerRundy++;
                 statsy = liczbaKlikniec / (numerRundy - 1);
-
+              
+scores["playerB"]++;
                 setTimeout(() => {
                     updatePlayerScore(playerB);
                 }, 1000)
