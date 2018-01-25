@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //funkcja wyświetlająca punkty
     function displayPlayerScore(player) {
 		var score = document.getElementById(`${player}-score`);
-		score.innerHTML = `${player} score: ${scores[player]}`;
+		score.innerHTML = `${names[player]} score: ${scores[player]}`;
 	}
 
     //funkcja dodająca punkty - player będzie zmienną
@@ -52,7 +52,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //Liczba pozostałych pól
     var emptyFields;
+    
+    //Będziemy zmieniać nazwy graczy
+    var names = {
+        'playerA':'playerA',
+        'playerB':'playerB'
+    };
 
+    for (let player in names) {
+		let renameButton = document.getElementById(`${player}-rename`);
+		renameButton.innerText = `Rename ${player}`;
+		renameButton.addEventListener('click', function () {
+			names[player] = prompt(`Rename ${player} to:`);
+			renameButton.innerText = `Rename ${names[player]}`;
+			displayRoundInformation();
+			displayPlayerScore('playerA');
+			displayPlayerScore('playerB');
+		})
+	}
+    
+    
+    
     function initGame() {
 
         //Znajduje wszystkie divy klasy board
@@ -217,6 +237,9 @@ scores["playerB"]++;
         //Dodatek kontrolny 
         console.log('Średnia liczba kliknięć na rundę: ' + statsy);
     }
+    
+    
+    
 });
 
 //DODATKI
