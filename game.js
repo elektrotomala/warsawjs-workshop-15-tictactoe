@@ -65,10 +65,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		renameButton.addEventListener('click', function () {
 			names[player] = prompt(`Rename ${player} to:`);
 			renameButton.innerText = `Rename ${names[player]}`;
-			displayRoundInformation();
-			displayPlayerScore('playerA');
+            
+            //var score = document.getElementById(`${player}-score`);
+            //score.innerHTML = `${player}`;
+            
+            displayPlayerScore('playerA');
 			displayPlayerScore('playerB');
-		})
+            
+						
+		});
 	}
     
     
@@ -141,6 +146,8 @@ czyjaRunda();
         console.log('Numer klikniecia: ' + liczbaKlikniec);
 
         checkWinner();
+   
+        
     }
 
     function checkWinner() {
@@ -244,3 +251,7 @@ scores["playerB"]++;
 
 //DODATKI
 //console.log('Liczba kliknięć i numer rundy: ' + liczbaKlikniec, numerRundy);
+
+
+//TEST
+//prompt('test działania');
